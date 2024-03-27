@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-///mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="whitekim.mybatisblog.repository.MemberRepository">
+    <select id="findAll" resultType="whitekim.mybatisblog.model.Member">
+        select
+            m.id,
+            m.username,
+            m.nickname,
+            m.at_created_time,
+            m.at_updated_time
+        from member m
+        where m.is_deleted = false
+    </select>
+    <select id="findById" parameterType="Long" resultType="whitekim.mybatisblog.model.Member">
+        select
+            m.id,
+            m.username,
+            m.nickname,
+            m.at_created_time,
+            m.at_updated_time
+        from member m
+        where m.is_deleted = false and m.id = #{id}
+    </select>
+    <insert id="save" parameterType="whitekim.mybatisblog.model.Member">
+        insert into member(username, password, nickname, at_created_time, at_updated_time)
+        values (#{username}, #{password}, #{nickname}, now(), now())
+    </insert>
+    <update id="update" parameterType="whitekim.mybatisblog.model.Member">
+        update member m
+        set m.password = #{password}, m.nickname =#{nickname}, m.at_updated_time = now()
+        where m.id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="Long">
+        delete
+        from member m
+        where m.id = #{id}
+    </delete>
+</mapper>

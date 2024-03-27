@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-///mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="whitekim.mybatisblog.repository.BoardRepository">
+    <select id="findById" resultType="whitekim.mybatisblog.model.Board" parameterType="Long">
+        select
+            b.id,
+            b.title,
+            b.content,
+            b.author,
+            b.at_created_time,
+            b.at_updated_time,
+            b.is_deleted
+        from Board b join Reply r on b.id = r.board
+        where b.is_deleted = false and b.id = #{id}
+    </select>
+    <select id="findAll" resultType="whitekim.mybatisblog.model.Board" parameterType="Long">
+        select
+            b.id,
+            b.title,
+            b.content,
+            b.author,
+            b.at_created_time,
+            b.at_updated_time,
+            b.is_deleted
+        from Board b join Reply r on b.id = r.board
+        where b.is_deleted = false
+    </select>
+    <insert id="save" parameterType="whitekim.mybatisblog.model.Board">
+        insert into Board(title, content, author, at_created_time, at_updated_time)
+        values (#{title}, #{content}, #{member.id}, now(), now())
+    </insert>
+    <update id="update" parameterType="whitekim.mybatisblog.model.Board">
+        update board b
+        set b.title = #{title}, b.content = #{content}, at_updated_time = now()
+        where b.id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="Long">
+        delete from Board b where b.id = #{id}
+    </delete>
+</mapper>
