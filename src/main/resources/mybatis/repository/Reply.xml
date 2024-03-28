@@ -5,7 +5,7 @@
         select
             r.id,
             r.message,
-            r.at_creted_time,
+            r.at_created_time,
             r.at_updated_time
         from reply r
         where r.is_deleted = false
@@ -14,14 +14,14 @@
         select
             r.id,
             r.message,
-            r.at_creted_time,
+            r.at_created_time,
             r.at_updated_time
         from reply r
         where r.is_deleted = false and r.id = #{id}
     </select>
     <insert id="save" parameterType="whitekim.mybatisblog.model.Reply">
-        insert into reply(message, at_created_time, at_updated_time)
-        values (#{message}, now(), now())
+        insert into reply(message, member, board, at_created_time, at_updated_time)
+        values (#{message}, #{member.id} ,#{board.id} ,now(), now())
     </insert>
     <update id="update" parameterType="whitekim.mybatisblog.model.Reply">
         update reply r

@@ -1,13 +1,15 @@
 package whitekim.mybatisblog.model;
 
+import lombok.Data;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Data
 public class Reply {
     private Long id;
     private String message;
+
     private Member member;
     private Board board;
 

@@ -21,7 +21,9 @@ public class BoardController {
 
     @GetMapping("/{id}")
     public Board findById(@PathVariable("id") Long id) {
-        return boardService.findById(id);
+        Board findBoard = boardService.findById(id);
+        System.out.println("findBoard = " + findBoard);
+        return findBoard;
     }
 
     @PostMapping
