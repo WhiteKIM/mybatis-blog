@@ -10,13 +10,11 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>웹페이지 제목</title>
-    <meta charset="utf-8">
+    <title>메인 페이지</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="author" content="WhiteKIM">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Blog Template · Bootstrap v5.3</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -283,7 +281,7 @@
                 <a class="link-secondary" href="#">Subscribe</a>
             </div>
             <div class="col-4 text-center">
-                <a class="blog-header-logo text-body-emphasis text-decoration-none" href="#">Large</a>
+                <a class="blog-header-logo text-body-emphasis text-decoration-none" href="#">WhiteKIM의 블로그</a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
                 <a class="link-secondary" href="#" aria-label="Search">
@@ -294,25 +292,16 @@
                         <path d="M21 21l-5.2-5.2"/>
                     </svg>
                 </a>
-                <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+                <a class="btn btn-sm btn-outline-secondary" href="/login">Sign up</a>
             </div>
         </div>
     </header>
 
     <div class="nav-scroller py-1 mb-3 border-bottom">
-        <nav class="nav nav-underline justify-content-between">
-            <a class="nav-item nav-link link-body-emphasis active" href="#">World</a>
-            <a class="nav-item nav-link link-body-emphasis" href="#">U.S.</a>
-            <a class="nav-item nav-link link-body-emphasis" href="#">Technology</a>
-            <a class="nav-item nav-link link-body-emphasis" href="#">Design</a>
-            <a class="nav-item nav-link link-body-emphasis" href="#">Culture</a>
-            <a class="nav-item nav-link link-body-emphasis" href="#">Business</a>
-            <a class="nav-item nav-link link-body-emphasis" href="#">Politics</a>
-            <a class="nav-item nav-link link-body-emphasis" href="#">Opinion</a>
-            <a class="nav-item nav-link link-body-emphasis" href="#">Science</a>
-            <a class="nav-item nav-link link-body-emphasis" href="#">Health</a>
-            <a class="nav-item nav-link link-body-emphasis" href="#">Style</a>
-            <a class="nav-item nav-link link-body-emphasis" href="#">Travel</a>
+        <nav class="nav nav-underline">
+            <a class="nav-item nav-link link-body-emphasis active" href="/category/Notice">공지</a>
+            <a class="nav-item nav-link link-body-emphasis" href="/category/Post">게시글</a>
+            <a class="nav-item nav-link link-body-emphasis" href="/category/">Technology</a>
         </nav>
     </div>
 </div>
@@ -320,7 +309,7 @@
 <main class="container">
     <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
         <div class="col-lg-6 px-0">
-            <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
+            <h1 class="display-4 fst-italic">제 블로그에 오신 여러분들을 환영합니다.</h1>
             <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
                 efficiently about what’s most interesting in this post’s contents.</p>
             <p class="lead mb-0"><a href="#" class="text-body-emphasis fw-bold">Continue reading...</a></p>
@@ -369,7 +358,7 @@
                     </a>
                 </div>
                 <div class="col-auto d-none d-lg-block">
-                    <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
+                    <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/Sign_upsvg"
                          role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
                          focusable="false"><title>Placeholder</title>
                         <rect width="100%" height="100%" fill="#55595c"/>
@@ -387,8 +376,8 @@
             </h3>
 
             <article class="blog-post">
-                <h2 class="display-5 link-body-emphasis mb-1">Sample blog post</h2>
-                <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p>
+                <h2 class="display-5 link-body-emphasis mb-1">Who is WhiteKIM</h2>
+                <p class="blog-post-meta">March 29, 2024 by <a href="#">WhiteKIM</a></p>
 
                 <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap.
                     Basic typography, lists, tables, images, code, and more are all supported as expected.</p>
@@ -604,7 +593,7 @@
                 <div class="p-4">
                     <h4 class="fst-italic">Archives</h4>
                     <ol class="list-unstyled mb-0">
-                        <li><a href="#">March 2021</a></li>
+                        <li><a href="/search">March 2021</a></li>
                         <li><a href="#">February 2021</a></li>
                         <li><a href="#">January 2021</a></li>
                         <li><a href="#">December 2020</a></li>
@@ -622,9 +611,8 @@
                 <div class="p-4">
                     <h4 class="fst-italic">Elsewhere</h4>
                     <ol class="list-unstyled">
-                        <li><a href="#">GitHub</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Facebook</a></li>
+                        <li><a href="https://github.com/WhiteKIM">GitHub</a></li>
+                        <li><a href="https://delightful-path-ef9.notion.site/TIF-81439ba110084bea8a713358c40a2823?pvs=74">Notion</a></li>
                     </ol>
                 </div>
             </div>

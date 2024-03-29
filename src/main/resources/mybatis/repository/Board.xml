@@ -8,13 +8,14 @@
         <result column="at_created_time" property="atCreatedTime"/>
         <result column="at_updated_time" property="atUpdatedTime"/>
         <result column="is_deleted" property="isDeleted"/>
+        <association property="author" resultMap="Member" javaType="whitekim.mybatisblog.model.Member"/>
         <collection property="replyList" resultMap="Reply" javaType="java.util.ArrayList" ofType="whitekim.mybatisblog.model.Reply"/>
     </resultMap>
     <resultMap id="Member" type="whitekim.mybatisblog.model.Member">
-        <id column="id" property="id"/>
-        <result column="username" property="title"/>
-        <result column="password" property="content"/>
-        <result column="nickname" property="at_created_time"/>
+        <id column="member_id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickname"/>
         <result column="at_created_time" property="atCreatedTime"/>
         <result column="at_updated_time" property="atUpdatedTime"/>
         <result column="is_deleted" property="isDeleted"/>
@@ -35,24 +36,32 @@
             b.at_created_time,
             b.at_updated_time,
             b.is_deleted,
-            r.id,
+            r.id as "reply_id",
             r.board,
             r.message,
             r.at_created_time,
-            r.at_updated_time
-        from Board b join Reply r on r.board = b.id
+            r.at_updated_time,
+            m.id as "member_id",
+            m.username,
+            m.nickname,
+            m.at_created_time,
+            m.at_updated_time
+        from
+            Board b
+                join Reply r on r.board = b.id
+                join Member m on m.id = b.author
         where b.is_deleted = false and b.id = #{id};
     </select>
     <select id="findAll" resultType="whitekim.mybatisblog.model.Board" parameterType="Long">
         select
-            b.id board_id,
+            b.id,
             b.title,
             b.content,
             b.author,
             b.at_created_time,
             b.at_updated_time,
             b.is_deleted
-        from Board b left join Reply r on board_id = r.board
+        from Board b
         where b.is_deleted = false
     </select>
     <insert id="save" parameterType="whitekim.mybatisblog.model.Board">
