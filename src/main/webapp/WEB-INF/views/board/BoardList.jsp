@@ -7,6 +7,7 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +19,8 @@
     <meta name="generator" content="Hugo 0.122.0">
     <title>Blog Template · Bootstrap v5.3</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -104,7 +104,7 @@
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="resources/css/blog.css" rel="stylesheet">
+    <link href="/resources/css/blog.css" rel="stylesheet/">
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -276,28 +276,7 @@
 </svg>
 
 <div class="container">
-    <header class="border-bottom lh-1 py-3">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-            <div class="col-4 pt-1">
-                <a class="link-secondary" href="#">Subscribe</a>
-            </div>
-            <div class="col-4 text-center">
-                <a class="blog-header-logo text-body-emphasis text-decoration-none" href="#">WhiteKIM의 블로그</a>
-            </div>
-            <div class="col-4 d-flex justify-content-end align-items-center">
-                <a class="link-secondary" href="#" aria-label="Search">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
-                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img"
-                         viewBox="0 0 24 24"><title>Search</title>
-                        <circle cx="10.5" cy="10.5" r="7.5"/>
-                        <path d="M21 21l-5.2-5.2"/>
-                    </svg>
-                </a>
-                <a class="btn btn-sm btn-outline-secondary" href="/login">Sign up</a>
-            </div>
-        </div>
-    </header>
-
+    <jsp:include page="../layout/header.jsp" flush="false"/>
     <div class="nav-scroller py-1 mb-3 border-bottom">
         <nav class="nav nav-underline">
             <a class="nav-item nav-link link-body-emphasis active" href="/category/Notice">공지</a>
@@ -350,7 +329,7 @@
         <div class="container">
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
+                <div class="col" onclick="{window.location.href='/board/2'}">
                     <div class="card shadow-sm">
                         <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                         <div class="card-body">
@@ -358,7 +337,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="{updateButtonClick(event, ${board.id})}">Edit</button>
                                 </div>
                                 <small class="text-body-secondary">9 mins</small>
                             </div>
@@ -507,4 +486,10 @@
     </nav>
     </main>
 </body>
+<script>
+    function updateButtonClick(event, id) {
+        event.stopPropagation();
+        window.location.href = '/update/'+id;
+    }
+</script>
 </html>

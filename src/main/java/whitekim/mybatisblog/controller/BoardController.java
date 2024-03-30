@@ -1,14 +1,16 @@
 package whitekim.mybatisblog.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import whitekim.mybatisblog.model.Board;
 import whitekim.mybatisblog.service.BoardService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/api/board")
 @RequiredArgsConstructor
 public class BoardController {
 
@@ -27,23 +29,20 @@ public class BoardController {
     }
 
     @PostMapping
-    public String save(@RequestBody Board board) {
+    public void save(@ModelAttribute Board board, HttpServletResponse response) throws IOException {
         boardService.save(board);
-
-        return "성공";
+        response.sendRedirect("/");
     }
 
     @PostMapping("/update")
-    public String update(@RequestBody Board board) {
+    public void update(@ModelAttribute Board board, HttpServletResponse response) throws IOException {
         boardService.update(board);
-
-        return "성공";
+        response.sendRedirect("/");
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public void delete(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
         boardService.deleteById(id);
-
-        return "성공";
+        response.sendRedirect("/");
     }
 }

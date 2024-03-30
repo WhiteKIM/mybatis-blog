@@ -31,19 +31,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h1>게시글 작성</h1>
-            <form action="/api/board" method="POST">
+            <h1>게시글 수정</h1>
+            <form action="/api/board/update" method="POST">
+                <input id="id" name="id" hidden="hidden">
                 <div class="form-group has-error">
                     <label for="image">이미지 <span class="require">*</span> <small>(썸네일 이미지.)</small></label>
                     <input type="file" accept="image/*" class="form-control" id="image" name="image" />
                 </div>
                 <div class="form-group">
                     <label for="title">Title <span class="require">*</span></label>
-                    <input type="text" id="title" class="form-control" name="title" />
+                    <input type="text" id="title" class="form-control" name="title" value="${board.title}"/>
                 </div>
                 <div class="form-group">
                     <label for="content">Description</label>
-                    <textarea rows="5" id="content" class="form-control" name="content" ></textarea>
+                    <textarea rows="5" id="content" class="form-control" name="content" >${board.content}</textarea>
                 </div>
                 <div class="form-group">
                     <p><span class="require">*</span> - required fields</p>
@@ -55,10 +56,24 @@
                     <button class="btn btn-default">
                         Cancel
                     </button>
+                    <button class="btn btn-default" onclick="deletePost()">
+                        Delete
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    let input_id = document.getElementById('id');
+    let split = window.location.href.split("/");
+    input_id.value = split[4];
+
+    function deletePost() {
+        fetch('api/board/${board.id}', {
+            method : 'delete'
+        });
+    }
+</script>
 </body>
 </html>

@@ -1,11 +1,18 @@
 package whitekim.mybatisblog.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import whitekim.mybatisblog.model.Board;
+import whitekim.mybatisblog.service.BoardService;
 
 @Controller
+@RequiredArgsConstructor
 public class MainController {
+
+    private final BoardService boardService;
 
     @GetMapping({"", "/"})
     public String index() {
@@ -30,5 +37,19 @@ public class MainController {
     @GetMapping("/write")
     public String writeForm() {
         return "board/BoardWrite";
+    }
+
+    @GetMapping("/board/{id}")
+    public String boardDetail(@PathVariable Long id, Model model) {
+        Board findBoard = boardService.findById(id);
+        model.addAttribute("board", findBoard);
+        return "board/BoardDetail";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateFomr(@PathVariable Long id, Model model) {
+        Board findBoard = boardService.findById(id);
+        model.addAttribute("board", findBoard);
+        return "board/BoardUpdate";
     }
 }
