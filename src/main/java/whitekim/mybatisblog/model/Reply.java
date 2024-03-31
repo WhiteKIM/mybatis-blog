@@ -10,7 +10,7 @@ public class Reply {
     private Long id;
     private String message;
 
-    private Member member;
+    private String member;
     private Board board;
 
     private LocalDateTime atCreatedTime;

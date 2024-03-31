@@ -1,5 +1,8 @@
 package whitekim.mybatisblog.service;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import whitekim.mybatisblog.model.Member;
@@ -27,5 +30,10 @@ public class MemberService {
     }
     public void deleteById(Long id) {
         memberRepository.deleteById(id);
+    }
+
+    public void login(Member loginMember, HttpServletResponse response, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute("loginAdmin", loginMember);
     }
 }

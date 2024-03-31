@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -140,8 +141,8 @@
                         <div class="card-body">
                             <!-- Comment form-->
                             <form class="mb-4" action="/api/reply" method="post" id="reply_form">
-                                <input id="commenter" name="commenter" hidden="hidden" value="anonymous">
-                                <textarea class="form-control" id="reply_input" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
+                                <input id="commenter" name="member" hidden="hidden" value="anonymous">
+                                <textarea class="form-control" id="reply_input" name="message" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
                             </form>
                             <!-- Comment with nested comments-->
                             <div class="card d-flex justify-content-between">

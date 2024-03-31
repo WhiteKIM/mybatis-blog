@@ -47,8 +47,7 @@
             r.at_created_time,
             r.at_updated_time
         from member m
-            join board b on b.author = m.id
-            join reply r on r.member = m.id
+            left join board b on b.author = m.id
         where m.is_deleted = false
     </select>
     <select id="findById" parameterType="Long" resultMap="Member">
@@ -71,8 +70,7 @@
             r.at_created_time,
             r.at_updated_time
         from member m
-                 join board b on b.author = m.id
-                 join reply r on r.member = m.id
+                 left join board b on b.author = m.id
         where m.is_deleted = false and m.id = #{id}
     </select>
     <insert id="save" parameterType="whitekim.mybatisblog.model.Member">

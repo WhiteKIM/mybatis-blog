@@ -1,10 +1,13 @@
 package whitekim.mybatisblog.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import whitekim.mybatisblog.model.Member;
 import whitekim.mybatisblog.service.MemberService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -29,6 +32,14 @@ public class MemberController {
         memberService.save(member);
 
         return "성공";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute Member loginMember, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        memberService.login(loginMember, response, request);
+
+        response.sendRedirect("/");
+        return "로그인 성공";
     }
 
     @PostMapping("/update")

@@ -48,11 +48,11 @@
             m.at_updated_time
         from
             Board b
-                join Reply r on r.board = b.id
-                join Member m on m.id = b.author
+                left join Reply r on r.board = b.id
+                left join Member m on m.id = b.author
         where b.is_deleted = false and b.id = #{id};
     </select>
-    <select id="findAll" resultType="whitekim.mybatisblog.model.Board" parameterType="Long">
+    <select id="findAll" resultType="whitekim.mybatisblog.model.Board">
         select
             b.id,
             b.title,

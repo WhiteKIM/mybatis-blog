@@ -30,7 +30,8 @@ public class MainController {
     }
 
     @GetMapping("/category/{category}")
-    public String list(@PathVariable String category) {
+    public String list(@PathVariable String category, Model model) {
+        model.addAttribute("boardList", boardService.findAll());
         return "board/BoardList";
     }
 
@@ -42,6 +43,7 @@ public class MainController {
     @GetMapping("/board/{id}")
     public String boardDetail(@PathVariable Long id, Model model) {
         Board findBoard = boardService.findById(id);
+        System.out.println("findBoard = " + findBoard);
         model.addAttribute("board", findBoard);
         return "board/BoardDetail";
     }
