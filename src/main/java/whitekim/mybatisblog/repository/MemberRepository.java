@@ -1,6 +1,7 @@
 package whitekim.mybatisblog.repository;
 
 import org.springframework.stereotype.Repository;
+import whitekim.mybatisblog.dto.request.LoginMemberDto;
 import whitekim.mybatisblog.model.Member;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface MemberRepository {
     List<Member> findAll();
     void update(Member member);
     void deleteById(Long id);
-
+    Member login(LoginMemberDto loginMemberDto);
 }

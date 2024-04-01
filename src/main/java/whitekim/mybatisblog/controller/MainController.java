@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import whitekim.mybatisblog.model.Board;
 import whitekim.mybatisblog.service.BoardService;
 
@@ -30,8 +31,14 @@ public class MainController {
     }
 
     @GetMapping("/category/{category}")
-    public String list(@PathVariable String category, Model model) {
-        model.addAttribute("boardList", boardService.findAll());
+    public String list(
+            @PathVariable String category,
+            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+            Model model) {
+
+        model.addAttribute("page", boardService.count()/10);
+        model.addAttribute("boardList", boardService.findAll(page, size));
         return "board/BoardList";
     }
 

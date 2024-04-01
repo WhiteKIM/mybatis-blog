@@ -15,6 +15,7 @@ public class Board {
     private String content;
 
     private Member author;
+    private Long image;
     private List<Reply> replyList = new ArrayList<>();
 
     private LocalDateTime atCreatedTime;

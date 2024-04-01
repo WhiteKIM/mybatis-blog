@@ -40,12 +40,7 @@
             b.author,
             b.at_created_time,
             b.at_updated_time,
-            b.is_deleted,
-            r.id as "reply_id",
-            r.board,
-            r.message,
-            r.at_created_time,
-            r.at_updated_time
+            b.is_deleted
         from member m
             left join board b on b.author = m.id
         where m.is_deleted = false
@@ -63,15 +58,19 @@
             b.author,
             b.at_created_time,
             b.at_updated_time,
-            b.is_deleted,
-            r.id as "reply_id",
-            r.board,
-            r.message,
-            r.at_created_time,
-            r.at_updated_time
+            b.is_deleted
         from member m
                  left join board b on b.author = m.id
         where m.is_deleted = false and m.id = #{id}
+    </select>
+    <select id="login" parameterType="whitekim.mybatisblog.dto.request.LoginMemberDto">
+        select m.id,
+               m.username,
+               m.nickname,
+               m.at_created_time,
+               m.at_updated_time
+        from member m
+        where m.username = #{username} and m.password = #{password} and m.is_deleted = false
     </select>
     <insert id="save" parameterType="whitekim.mybatisblog.model.Member">
         insert into member(username, password, nickname, at_created_time, at_updated_time)

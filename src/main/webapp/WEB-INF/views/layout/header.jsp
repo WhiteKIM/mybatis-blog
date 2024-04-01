@@ -7,7 +7,7 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="border-bottom lh-1 py-3">
 	<div class="row flex-nowrap justify-content-between align-items-center">
 		<div class="col-4 pt-1">
@@ -24,7 +24,14 @@
 					<path d="M21 21l-5.2-5.2"/>
 				</svg>
 			</a>
-			<a class="btn btn-sm btn-outline-secondary" href="/login">Sign up</a>
+			<c:choose>
+				<c:when test="${not empty sessionScope.loginAdmin}">
+					<a class="btn btn-sm btn-outline-secondary" href="/api/member/logout">로그아웃</a>
+				</c:when>
+				<c:otherwise>
+					<a class="btn btn-sm btn-outline-secondary" href="/login">로그인</a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 </header>

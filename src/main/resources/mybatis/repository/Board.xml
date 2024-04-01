@@ -8,6 +8,7 @@
         <result column="at_created_time" property="atCreatedTime"/>
         <result column="at_updated_time" property="atUpdatedTime"/>
         <result column="is_deleted" property="isDeleted"/>
+        <result column="image" property="image"/>
         <association property="author" resultMap="Member" javaType="whitekim.mybatisblog.model.Member"/>
         <collection property="replyList" resultMap="Reply" javaType="java.util.ArrayList" ofType="whitekim.mybatisblog.model.Reply"/>
     </resultMap>
@@ -36,6 +37,7 @@
             b.at_created_time,
             b.at_updated_time,
             b.is_deleted,
+            b.image,
             r.id as "reply_id",
             r.board,
             r.message,
@@ -60,13 +62,21 @@
             b.author,
             b.at_created_time,
             b.at_updated_time,
-            b.is_deleted
+            b.is_deleted,
+            b.image
         from Board b
         where b.is_deleted = false
+        order by b.at_created_time desc
+        limit #{limit}, #{offset}
     </select>
-    <insert id="save" parameterType="whitekim.mybatisblog.model.Board">
-        insert into Board(title, content, author, at_created_time, at_updated_time)
-        values (#{title}, #{content}, #{author.id}, now(), now())
+    <select id="count" resultType="int">
+        select
+            count(*)
+        from board b;
+    </select>
+    <insert id="save" parameterType="whitekim.mybatisblog.dto.request.BoardRequestDto">
+        insert into Board(title, content, author, image, at_created_time, at_updated_time)
+        values (#{title}, #{content}, #{authorId},#{imageId}, now(), now())
     </insert>
     <update id="update" parameterType="whitekim.mybatisblog.model.Board">
         update board b

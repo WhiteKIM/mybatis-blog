@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import whitekim.mybatisblog.dto.request.LoginMemberDto;
 import whitekim.mybatisblog.model.Member;
 import whitekim.mybatisblog.repository.MemberRepository;
 
@@ -32,7 +33,11 @@ public class MemberService {
         memberRepository.deleteById(id);
     }
 
-    public void login(Member loginMember, HttpServletResponse response, HttpServletRequest request) {
+    public void login(LoginMemberDto loginMember, HttpServletResponse response, HttpServletRequest request) {
+        Member member = memberRepository.login(loginMember);
+        if(member == null)
+            throw new IllegalArgumentException("로그인 정보가 일치하지 않습니다.");
+
         HttpSession session = request.getSession();
         session.setAttribute("loginAdmin", loginMember);
     }

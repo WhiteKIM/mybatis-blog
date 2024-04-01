@@ -277,13 +277,6 @@
 
 <div class="container">
     <jsp:include page="../layout/header.jsp" flush="false"/>
-    <div class="nav-scroller py-1 mb-3 border-bottom">
-        <nav class="nav nav-underline">
-            <a class="nav-item nav-link link-body-emphasis active" href="/category/Notice">공지</a>
-            <a class="nav-item nav-link link-body-emphasis" href="/category/Post">게시글</a>
-            <a class="nav-item nav-link link-body-emphasis" href="/category/">Technology</a>
-        </nav>
-    </div>
 </div>
 <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
     <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
@@ -322,7 +315,9 @@
 <main>
 
     <section class="text-center container clearfix">
-        <a class="btn btn-outline-secondary btn-sm float-end" href="/write">작성</a>
+        <c:if test="${not empty sessionScope.loginAdmin}">
+            <a class="btn btn-outline-secondary btn-sm float-end" href="/write">작성</a>
+        </c:if>
     </section>
 
     <div class="album py-5 bg-body-tertiary">
@@ -332,7 +327,16 @@
                 <c:forEach var="board" items="${boardList}">
                     <div class="col" onclick="{window.location.href='/board/${board.id}'}">
                         <div class="card shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                            <svg class="bd-placeholder-img card-img-top" width="50px" height="50px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <c:choose>
+                                    <c:when test="${not empty board.image}">
+                                        <img src="http://localhost:8080/api/image/${board.image}">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="/resources/images/default_image.png" />
+                                    </c:otherwise>
+                                </c:choose>
+                            </svg>
                             <div class="card-body">
                                 <p class="card-text">${board.title}</p>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -351,17 +355,16 @@
     </div>
     <nav aria-label="..." >
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
+            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a></li>
+            <%
+                int count = (Integer)request.getAttribute("page");
+                for(int i = 0; i <= count; i++) {
+            %>
+            <li class="page-item"><a class="page-link" href="/category/Post?page=<%= i+1 %>"><%= i+1 %></a></li>
+            <%
+                }
+            %>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
         </ul>
     </nav>
     </main>

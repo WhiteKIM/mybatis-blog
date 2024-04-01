@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h1>게시글 작성</h1>
-            <form action="/api/board" method="POST">
+            <form action="/api/board" method="POST" enctype="multipart/form-data">
                 <div class="form-group has-error">
                     <label for="image">이미지 <span class="require">*</span> <small>(썸네일 이미지.)</small></label>
                     <input type="file" accept="image/*" class="form-control" id="image" name="image" />

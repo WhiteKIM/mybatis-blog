@@ -2,8 +2,10 @@ package whitekim.mybatisblog.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import whitekim.mybatisblog.dto.request.LoginMemberDto;
 import whitekim.mybatisblog.model.Member;
 import whitekim.mybatisblog.service.MemberService;
 
@@ -11,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/api/member")
 @RequiredArgsConstructor
 public class MemberController {
 
@@ -35,9 +37,17 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute Member loginMember, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public String login(@ModelAttribute LoginMemberDto loginMember, HttpServletResponse response, HttpServletRequest request) throws IOException {
         memberService.login(loginMember, response, request);
 
+        response.sendRedirect("/");
+        return "로그인 성공";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        HttpSession session = request.getSession();
+        session.invalidate();
         response.sendRedirect("/");
         return "로그인 성공";
     }
